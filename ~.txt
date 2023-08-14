@@ -1,0 +1,13 @@
+﻿---l1(react)
+https://react.dev/learn/start-a-new-react-project
+npx create-next-app frontend_hh.kz
+D:\!nodejs\frontend_hh.kz поменял на D:\nodejs\frontend_hh.kz т.к "!" зарезервированный символ в конфигурации Webpack
+npm run dev
+http://localhost:3000/
+
+
+git add .
+git commit -m "initial"
+git remote add origin https://github.com/ivannikovmn/20230814a-Decode-frontend-Headhunter
+	p.s git branch --move master main - переименовать master в main в visual code 
+git push origin main
