@@ -1,12 +1,18 @@
 // import Image from 'next/image'
-import styles from './page.module.css'
+// import styles from './page.module.css'
+import Header from '../components/header'
 import Test from '../components/test'
+import UserLogin from '../components/auth/user'
+
 export default function Home() {
   return (
     // <main className={styles.main}>
     <main>
-      Hello Decode!
+      <Header />
+      <UserLogin/>
+      {/* Hello Decode! */}
       <Test />
+
       {/* <div className={styles.description}>
         <p>
           Get started by editing&nbsp;

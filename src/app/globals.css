@@ -1,3 +1,11 @@
+@import url('style/components/base.css');
+@import url('style/components/header.css');
+@import url('style/components/login.css');
+@import url('style/components/typography.css');
+@import url('style/components/button.css');
+@import url('style/components/input.css');
+@import url('style/components/card.css');
+
 /* :root {
   --max-width: 1100px;
   --border-radius: 12px;
