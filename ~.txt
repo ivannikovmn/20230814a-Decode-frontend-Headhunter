@@ -4,7 +4,9 @@ npx create-next-app frontend_hh.kz
 D:\!nodejs\frontend_hh.kz поменял на D:\nodejs\frontend_hh.kz т.к "!" зарезервированный символ в конфигурации Webpack
 npm run dev
 http://localhost:3000/
-
+---l3(react)
+http://localhost:3000/login
+http://localhost:3000/resumes
 
 git add .
 git commit -m "initial"
@@ -14,4 +16,11 @@ git push origin main
 ---
 git add .
 git commit -m "add RestAPI l-1 (header, auth/user)"
+git push origin main
+---
+git commit --amend -m "add React l-2 (header, auth/user)"
+git push --force origin main
+---
+git add .
+git commit -m "add RestAPI l-3 (reg, resumes)"
 git push origin main
