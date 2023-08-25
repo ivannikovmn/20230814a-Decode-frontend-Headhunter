@@ -7,6 +7,8 @@ http://localhost:3000/
 ---l3(react)
 http://localhost:3000/login
 http://localhost:3000/resumes
+---l4
+npm i axios
 
 git add .
 git commit -m "initial"
@@ -20,7 +22,12 @@ git push origin main
 ---
 git commit --amend -m "add React l-2 (header, auth/user)"
 git push --force origin main
+--- 
+git add .
+git commit -m "add React l-3 (login, resumes)" 
+git push origin main
+//неверный комит не сохранил
 ---
 git add .
-git commit -m "add RestAPI l-3 (reg, resumes)"
+git commit -m "add React l-4 (AutoCompliteSelect)" 
 git push origin main
