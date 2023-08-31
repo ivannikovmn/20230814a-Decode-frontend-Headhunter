@@ -25,7 +25,7 @@ export default function AutoCompliteSelect({label, placeholder, type, size, item
         }else{
             // setFilteredItems([...items.filter(item => item.name.includes(e.target.value))])
             const filter = items.filter(item => item.name.includes(e.target.value))
-            setFilteredItems([filter])
+            setFilteredItems([...filter]) //fix add ...
         }        
     }
 
