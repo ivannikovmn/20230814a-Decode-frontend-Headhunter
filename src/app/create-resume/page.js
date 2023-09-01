@@ -6,12 +6,15 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import AutoCompliteSelect from '@/components/AutoCompliteSelect'
 import SelectDate from '@/components/SelectDate';
-import WorkingHistory from '@/components/WorkingHistory/Index'; 
+import WorkingHistory from '@/components/WorkingHistory'; 
+import AutoCompliteTags from '@/components/AutoCompliteTags';
 
 import ModalAddExp from '@/components/ModalAddExp';
+import AddEducation from '@/components/AddEducation';
 export default function CreateResume() {
   const [cities, setCities] = useState([])
   const [countries, setCountries] = useState([])
+  const [skills, setSkills] = useState([])
   const [workingHistories, setworkingHistories] = useState([])
 
   const [ModalExpIsOpen, setmodalExpIsOpen] = useState(false)
@@ -26,6 +29,11 @@ export default function CreateResume() {
       // console.log(res.data);
       setCountries(res.data)
     })    
+
+    axios.get(`${END_POINT}/api/skills`).then(res => {
+      // console.log(res.data);
+      setSkills(res.data)
+    })     
   }, [])
 
   console.log("rerender")
@@ -110,6 +118,17 @@ export default function CreateResume() {
             </div>            
         </fieldset>
 
+        <fieldset className={"fieldset fieldset-lg"}>
+            <label>О себе</label>
+            <textarea className="textarea" placeholder='Расскажите о себе'></textarea>
+        </fieldset>   
+
+        {/* <AutoCompliteTags  placeholder="" type="text" label="Ключевые навыки" size="fieldset-md" items={countries} onSelect={onSelect}/>  */}
+        <AutoCompliteTags  placeholder="" type="text" label="Ключевые навыки" size="fieldset-md" items={skills} onSelect={onSelect}/> 
+
+        <h3>Образование</h3>
+
+        <AddEducation onChange={() => {}}/>
       </div>
     </main>
   )

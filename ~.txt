@@ -35,3 +35,8 @@ git push origin main
 git add .
 git commit -m "add React l-5 (modal window WorkingHistory), fix AutoCompliteSelect/input" 
 git push origin main
+---
+git add .
+git commit -m "add React l-6 (AutoCompliteTags, AddEducation)" 
+git push origin main
+---

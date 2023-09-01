@@ -17,6 +17,12 @@
     flex-direction: column;
 }
 
+.tags {
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+}
+
 .tag {
     padding: 5px;
     border-radius: 4px;
