@@ -40,3 +40,6 @@ git add .
 git commit -m "add React l-6 (AutoCompliteTags, AddEducation)" 
 git push origin main
 ---
+git add .
+git commit -m "add React l-7 (SelectEmploymentTypes)" 
+git push origin main
