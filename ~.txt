@@ -9,6 +9,14 @@ http://localhost:3000/login
 http://localhost:3000/resumes
 ---l4
 npm i axios
+---l8
+https://react-redux.js.org/ > https://react-redux.js.org/tutorials/quick-start
+npm install @reduxjs/toolkit react-redux
+https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd
+https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi
+https://jwt.io/
+https://www.npmjs.com/package/jwt-decode
+npm i jwt-decode
 
 git add .
 git commit -m "initial"
@@ -42,4 +50,8 @@ git push origin main
 ---
 git add .
 git commit -m "add React l-7 (SelectEmploymentTypes)" 
+git push origin main
+---
+git add .
+git commit -m "add React l-8 (auth header)" 
 git push origin main

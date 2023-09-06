@@ -5,7 +5,7 @@ export default function login() {
   return (
     <main>
       <Header />
-      <UserLogin/>
+      <UserLogin />
     </main>
   )
 }
