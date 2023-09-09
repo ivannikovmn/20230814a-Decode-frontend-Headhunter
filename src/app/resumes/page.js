@@ -1,36 +1,52 @@
+'use client'
 // import Header from '../../components/header'
 import Header from '@/components/header'
 import MyResumes from '@/components/myresumes'
+import { useEffect } from 'react'
+
+import { useDispatch, useSelector } from 'react-redux'
+import { getMyResumes } from '@/app/store/slices/resumeSlice';
+
 export default function ResumePage() {
-  // const resumes = [1, 2, 3, 4, 5]
-  const resumes = [{
-    position: "Менеджер отдела продаж",
-    createdAt: "25.07.2023",
-    stats: {
-      views: 0,
-      applies: 0,
-      show: 0
-    }
-  }, 
-  {
-    position: "Back-end Developer",
-    createdAt: "20.08.2023",
-    stats: {
-      views: 100,
-      applies: 7,
-      show: 100
-    }
+
+  const dispatch = useDispatch();
+  const resumes = useSelector((state) => state.resume.resumes)
+  // console.log("here", resumes);
+  const didMount = () => {
+    dispatch(getMyResumes())
   }
-  , 
-  {
-    position: "React Developer",
-    createdAt: "10.05.2023",
-    stats: {
-      views: 4,
-      applies: 1,
-      show: 513
-    }
-  }]
+  useEffect(didMount, [])
+
+  // const resumes = [1, 2, 3, 4, 5]
+  // const resumes = [{
+  //   position: "Менеджер отдела продаж",
+  //   createdAt: "25.07.2023",
+  //   stats: {
+  //     views: 0,
+  //     applies: 0,
+  //     show: 0
+  //   }
+  // }, 
+  // {
+  //   position: "Back-end Developer",
+  //   createdAt: "20.08.2023",
+  //   stats: {
+  //     views: 100,
+  //     applies: 7,
+  //     show: 100
+  //   }
+  // }
+  // , 
+  // {
+  //   position: "React Developer",
+  //   createdAt: "10.05.2023",
+  //   stats: {
+  //     views: 4,
+  //     applies: 1,
+  //     show: 513
+  //   }
+  // }]
+
   return (
     <main>
       <Header />

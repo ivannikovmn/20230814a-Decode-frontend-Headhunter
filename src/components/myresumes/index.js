@@ -7,13 +7,22 @@ import MyResume from "./myresume";
     // const showResumes = asd.map(item => (<MyResume/>));
     // const showResumes = props.asd.map(item => (<MyResume/>));
     // const showResumes = resumes.map(item => (<MyResume/>));
-    const showResumes = resumes.map(item => (<MyResume item={item} />)); 
-    // const showResumes = resumes.map(item => 
-    //     (<MyResume position={item.position} 
-    //                createdAt={item.createdAt} 
-    //                show={item.stats.show} 
-    //                views={item.stats.views} 
-    //                applies={item.stats.applies}/>));
+
+    // const showResumes = resumes.map(item => (<MyResume item={item} />)); 
+    
+    const showResumes = resumes.map(item => 
+        // (<MyResume position={item.position} 
+        //            createdAt={item.createdAt} 
+        //            show={item.stats.show} 
+        //            views={item.stats.views} 
+        //            applies={item.stats.applies}/>));
+        (<MyResume position={item.position} 
+                   createdAt={item.createdAt} 
+                   show={0} 
+                   views={0} 
+                   applies={0}
+                   key={item.id}
+                   />));        
 
     return (<div>
         {showResumes}

@@ -53,5 +53,9 @@ git commit -m "add React l-7 (SelectEmploymentTypes)"
 git push origin main
 ---
 git add .
-git commit -m "add React l-8 (auth header)" 
+git commit -m "add React l-8 (auth header)"
+git push origin main
+---
+git add .
+git commit -m "add React l-9 (p1 fix img alt) (p2 view myResumes, fix index.js [myresume, myresumes])"
 git push origin main
