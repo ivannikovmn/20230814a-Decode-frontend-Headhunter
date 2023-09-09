@@ -1,6 +1,7 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
-export default function SelectEmploymentTypes({employmentTypes, label, size}) {
+// export default function SelectEmploymentTypes({employmentTypes, label, size}) {
+export default function SelectEmploymentTypes({employmentTypes, label, size, onChange}) {
     const [eTypes, setETypes] = useState([])
 
     const onSelect = (e) => {
@@ -16,7 +17,10 @@ export default function SelectEmploymentTypes({employmentTypes, label, size}) {
         }
     }
 
-    console.log(eTypes);
+    // console.log(eTypes);
+    useEffect(()=> {
+        onChange(eTypes)
+    }, [eTypes]) 
 
     return(
         <fieldset className={"fieldset " + size}>

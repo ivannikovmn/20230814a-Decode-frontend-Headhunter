@@ -13,11 +13,14 @@ export const resumeSlice = createSlice({
     setMyResumes: (state, action) => {
         state.resumes = action.payload.resumes
     },
+    uppendResume: (state, action) => {
+      state.resumes = [...state.resumes, action.payload.newResume]
+    }
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { setMyResumes } = resumeSlice.actions
+export const { setMyResumes, uppendResume } = resumeSlice.actions
 
 export const getMyResumes = () => async (dispatch) => {
     
@@ -33,6 +36,20 @@ export const getMyResumes = () => async (dispatch) => {
         alert("Что-то пошло не так, сообщите об ошибки тех спецам сайта!")
     }
     
+}
+
+// export const createResume = (sendData) => async (dispatch) => {
+export const createResume = (sendData, router) => async (dispatch) => {  
+    try{      
+        const res = await axios.post(`${END_POINT}/api/resume`, sendData);
+        router.push("/resumes")
+        // console.log(res.data);
+
+        dispatch(uppendResume({newresume: res.data}))        
+    }catch(e){
+      console.log(e);
+        alert("Что-то пошло не так, сообщите об ошибки тех спецам сайта!")
+    }  
 }
 
 export default resumeSlice.reducer

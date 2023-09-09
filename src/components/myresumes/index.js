@@ -10,20 +10,24 @@ import MyResume from "./myresume";
 
     // const showResumes = resumes.map(item => (<MyResume item={item} />)); 
     
-    const showResumes = resumes.map(item => 
+    const showResumes = resumes.map(item => (
         // (<MyResume position={item.position} 
         //            createdAt={item.createdAt} 
         //            show={item.stats.show} 
         //            views={item.stats.views} 
         //            applies={item.stats.applies}/>));
-        (<MyResume position={item.position} 
-                   createdAt={item.createdAt} 
-                   show={0} 
-                   views={0} 
-                   applies={0}
-                   key={item.id}
-                   />));        
-
+        // (<MyResume position={item.position} 
+        <MyResume
+            // <профиксино, иначе не создавалось резюме>
+            position={item?.position ?? 'Позиция не указана'}
+            createdAt={item?.createdAt ?? 'Дата не указана'}
+            // </профиксино, иначе не создавалось резюме>
+            show={0}
+            views={0}
+            applies={0}
+            key={0}
+        />
+        ));    
     return (<div>
         {showResumes}
     </div>)
