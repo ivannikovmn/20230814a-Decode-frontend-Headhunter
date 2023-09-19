@@ -1,16 +1,24 @@
 'use client';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Input from "../input";
 
-export default function AutoCompliteSelect({label, placeholder, type, size, items, onSelect}) {
+export default function AutoCompliteSelect({label, placeholder, type, size, items, onSelect, selected}) {
     const [value, setValue] = useState({name: ""})
-    
+    // console.log('123');
     const [filteredItems, setFilteredItems] = useState([])
     const onClick = (item) => {
         onSelect(item)
         setValue(item)
         setFilteredItems([])
     }
+
+    useEffect(() => {
+        // console.log("here");
+        items.map(item => {
+            if(item.id === selected) setValue(item)
+        })
+        // setValue(selected)
+    }, [selected, items])
     
     const reset = () => {
         setValue({name: ""})

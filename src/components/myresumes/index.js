@@ -17,17 +17,20 @@ import MyResume from "./myresume";
         //            views={item.stats.views} 
         //            applies={item.stats.applies}/>));
         // (<MyResume position={item.position} 
-        <MyResume
-            // <профиксино, иначе не создавалось резюме>
-            position={item?.position ?? 'Позиция не указана'}
-            createdAt={item?.createdAt ?? 'Дата не указана'}
-            // </профиксино, иначе не создавалось резюме>
-            show={0}
-            views={0}
-            applies={0}
-            key={0}
-        />
-        ));    
+        // <MyResume
+        //     // <профиксино, иначе не создавалось резюме>
+        //     position={item?.position ?? 'Позиция не указана'}
+        //     createdAt={item?.createdAt ?? 'Дата не указана'}
+        //     // </профиксино, иначе не создавалось резюме>
+        //     show={0}
+        //     views={0}
+        //     applies={0}
+        //     key={0}
+        // />
+        // ));
+        <MyResume item={item}
+        key={item.id}
+        />));    
     return (<div>
         {showResumes}
     </div>)

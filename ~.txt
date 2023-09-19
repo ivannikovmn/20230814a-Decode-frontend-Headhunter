@@ -7,6 +7,9 @@ http://localhost:3000/
 ---l3(react)
 http://localhost:3000/login
 http://localhost:3000/resumes
+http://localhost:3000/resumes/3
+http://localhost:3000/create-resume
+http://localhost:3000/edit-resume/2
 ---l4
 npm i axios
 ---l8
@@ -62,4 +65,8 @@ git push origin main
 ---
 git add .
 git commit -m "add React l-9 (p3-p4 create resume)"
+git push origin main
+---
+git add .
+git commit -m "add React l-10 (p4 fix htmlFor, resumes: fix create resume, p1-p3 view, p4 edit, p5 delete)"
 git push origin main

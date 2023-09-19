@@ -3,8 +3,7 @@ import Header from '@/components/header'
 import Input from '@/components/input';
 import { END_POINT } from '@/config/end-point';
 import axios from 'axios';
-// import { use, useEffect, useState } from 'react';
-import { useEffect, useState } from 'react';
+import { use, useEffect, useState } from 'react';
 import AutoCompliteSelect from '@/components/AutoCompliteSelect'
 import SelectDate from '@/components/SelectDate';
 import WorkingHistory from '@/components/WorkingHistory'; 
@@ -13,14 +12,17 @@ import ModalAddExp from '@/components/ModalAddExp';
 import AddEducation from '@/components/AddEducation';
 import AddLang from '@/components/AddLang';
 import SelectEmploymentTypes from '@/components/SelectEmploymentTypes';
-import { useRouter } from 'next/navigation';
-import { useDispatch } from 'react-redux';
-import { createResume } from '@/app/store/slices/resumeSlice';
+import { useRouter, useParams } from 'next/navigation';
+import { useDispatch, useSelector } from 'react-redux';
+import { editResume, getResumeById } from '@/app/store/slices/resumeSlice';
+
 
 export default function CreateResume() {
 
   const router = useRouter()
   const dispatch = useDispatch()
+  const {id} = useParams();
+  const resume = useSelector(state => state.resume.resume)
   const [cities, setCities] = useState([])
   const [countries, setCountries] = useState([])
   // const [skills, setSkills] = useState([])
@@ -41,12 +43,13 @@ export default function CreateResume() {
   const [salary_type, setSalaryType] = useState("KZT")  
   const [skills, setSelectedSkills] = useState("")
   const [education, setEducation] = useState([])
-  const [foreignLanguages, setForeignLanguages] = useState("")
+  const [foreignLanguages, setForeignLanguages] = useState([])
   const [employmentTypes, setSelectedEmpTypes] = useState([])
   const [about, setAbout] = useState("")
   
   useEffect(() => {
     console.log("didMount");
+    dispatch(getResumeById(id))
     axios.get(`${END_POINT}/api/region/cities`).then(res => {
       // console.log(res.data);
       setCities(res.data)
@@ -68,28 +71,28 @@ export default function CreateResume() {
     })    
   }, [])
 
-  // console.log("rerender", {
-  //   first_name,
-  //   last_name,
-  //   cityId,
-  //   birthday,
-  //   gender,
-  //   citizenship,
-  //   salary,
-  //   salary_type,
-  //   position,
-  //   skills,
-  //   education,
-  //   employmentTypes,
-  //   foreignLanguage
-  // })
-
-  // const onSelect =(data) => {
-  //   console.log('onSelect', data);
-  // }
-  const onSelect =(data) => {
-    
-  }  
+  useEffect(()=> {
+    if(resume.id){
+        setCitiy(resume.cityId)
+        setSelectedEmpTypes(resume.employmentTypes.map(et=>et.id))
+        setName(resume.first_name)
+        setSurname(resume.last_name)
+        setPhone(resume.phone)
+        setGender(resume.gender)
+        setCitizenship(resume.citizenship)
+        setPosition(resume.position)
+        setSalary(resume.salary)
+        setSalaryType(resume.salary_type)
+        setworkingHistories(resume.workingHistories)
+        setAbout(resume.about)
+        setSelectedSkills(resume.skills)
+        setEducation(resume.education)
+        // console.log('here ' + resume.employmentTypes.map(et=>et.id))
+        setForeignLanguages(resume.foreignLanguages)
+        // console.log(resume.education);
+        console.log(resume.foreignLanguages);
+    }
+  }, [resume])
   
   const closeModalExp = () => {
     setmodalExpIsOpen(false)
@@ -119,30 +122,9 @@ export default function CreateResume() {
     setSelectedSkills(arr.join(","))
   }   
 
-  // const handleSave = () => {
-  //   console.log("onSave", {
-  //     first_name,
-  //     last_name,
-  //     phone,
-  //     cityId,
-  //     birthday,
-  //     gender,
-  //     citizenship,
-  //     position,
-  //     about,
-  //     salary,
-  //     salary_type,   
-  //     workingHistories,   
-  //     skills,
-  //     education,
-  //     employmentTypes,
-  //     foreignLanguage,
-      
-  //   })
-  // }
- 
   const handleSave = () => {
-    dispatch(createResume(    {
+    dispatch(editResume(    {      
+      id: resume.id,
       first_name,
       last_name,
       phone,
@@ -163,7 +145,18 @@ export default function CreateResume() {
     }, router))
 
   }
-   
+
+  // console.log(skills.split(",").map(item=> ({name: item})));
+  
+  let eds = education.map(ed => {
+    const end = new Date(ed.end_date)
+    console.log(end, end.getFullYear());
+    return {
+    ...ed,
+    end_date: end.getFullYear()
+    }
+})
+
   return (
     <main>
       <Header />
@@ -171,33 +164,35 @@ export default function CreateResume() {
         <h1>Ваше резюме</h1>
 
         <h3>Контактные данные</h3>
-        <Input placeholder="" type="text" label="Имя" size="fieldset-md" onChange={(e) => setName(e.target.value)}/>
-        <Input placeholder="" type="text" label="Фамилия" size="fieldset-md" onChange={(e) => setSurname(e.target.value)}/>
-        <Input placeholder="" type="text" label="Мобильный телефон" size="fieldset-md" onChange={(e) => setPhone(e.target.value)}/>
-        <AutoCompliteSelect placeholder="" type="text" label="Город проживания" size="fieldset-md" items={cities} onSelect={(data) => setCitiy(data.id)}/>
+        <Input placeholder="" type="text" label="Имя" size="fieldset-md" onChange={(e) => setName(e.target.value)} value={first_name}/>
+        <Input placeholder="" type="text" label="Фамилия" size="fieldset-md" onChange={(e) => setSurname(e.target.value)} value={last_name}/>
+        <Input placeholder="" type="text" label="Мобильный телефон" size="fieldset-md" onChange={(e) => setPhone(e.target.value)} value={phone}/>
+        <AutoCompliteSelect placeholder="" type="text" label="Город проживания" size="fieldset-md" items={cities} onSelect={(data) => setCitiy(data.id)} selected={cityId}/>
         
         <h3>Основная информация</h3>
-        <SelectDate size="fieldset-sm" label="Дата рождения" onChange={(date) => setBirthday(date)}/>
+        <SelectDate size="fieldset-sm" label="Дата рождения" onChange={(date) => setBirthday(date)} value={resume.birthday}/>
         <fieldset className={"fieldset fieldset-sm"}>
             <label>Пол</label>
 
             <div className="radio-group">
               <div className="radio">
-                <input type="radio" onChange={handleGenderChange} name="gender" id="g1" value={"Мужской"}/>
-                <label for="g1">Мужской</label>
+                {resume.gender && resume.gender === "Мужской" && <input type="radio" onChange={handleGenderChange} name="gender" id="g1" value={"Мужской"} checked/>}
+                {!resume.gender || resume.gender !== "Мужской" && <input type="radio" onChange={handleGenderChange} name="gender" id="g1" value={"Мужской"}/>}
+                <label htmlFor="g1">Мужской</label>
               </div>
-              <div className="radio">
-                <input type="radio" onChange={handleGenderChange} name="gender" id="g2" value={"Женский"}/>
-                <label for="g2">Женский</label>
+              <div className="radio">                
+                {resume.gender && resume.gender === "Женский" && <input type="radio" onChange={handleGenderChange} name="gender" id="g2" value={"Женский"} checked/>}
+                {!resume.gender || resume.gender !== "Женский" && <input type="radio" onChange={handleGenderChange} name="gender" id="g2" value={"Женский"}/>}
+                <label htmlFor="g2">Женский</label>
               </div>
             </div>            
         </fieldset>
 
-        <AutoCompliteSelect placeholder="" type="text" label="Гражданство" size="fieldset-md" items={countries} onSelect={(data) => setCitizenship(data.id)}/>
+        <AutoCompliteSelect placeholder="" type="text" label="Гражданство" size="fieldset-md" items={countries} onSelect={(data) => setCitizenship(data.id)} selected={citizenship}/>
 
         <h3>Специальность</h3>
 
-        <Input placeholder="" type="text" label="Желаемая должность" size="fieldset-lg" onChange={(e) => setPosition(e.target.value)}/>
+        <Input placeholder="" type="text" label="Желаемая должность" size="fieldset-lg" onChange={(e) => setPosition(e.target.value)} value={position}/>
 
         <fieldset className={"fieldset fieldset-lg"}>
             <label>Зарплата</label>
@@ -229,21 +224,21 @@ export default function CreateResume() {
             <label>О себе</label>
             <textarea className="textarea" placeholder='Расскажите о себе' onChange={(e) => setAbout(e.target.value)} value={about}></textarea>
         </fieldset>   
-
-        {/* <AutoCompliteTags  placeholder="" type="text" label="Ключевые навыки" size="fieldset-md" items={countries} onSelect={onSelect}/>  */}
-        {/* <AutoCompliteTags  placeholder="" type="text" label="Ключевые навыки" size="fieldset-md" items={skills} onSelect={onSelect}/>  */}
-        <AutoCompliteTags  placeholder="" type="text" label="Ключевые навыки" size="fieldset-md" items={allSkills} onSelect={onSkillsChange} selected={[]}/> 
+        
+        <AutoCompliteTags  placeholder="" type="text" label="Ключевые навыки" size="fieldset-md" items={allSkills} onSelect={onSkillsChange} selected={skills.split(",").map(item=> ({name: item}))}/> 
 
         <h3>Образование</h3>
 
-        <AddEducation onChange={(eds) => setEducation(eds)} education={[]}/>
+        {/* <AddEducation onChange={(eds) => setEducation(eds)} education={education}/> */}
+        <AddEducation onChange={(eds) => setEducation(eds)} education={eds}/>
 
         <h3>Владение языками</h3>
 
-        <AddLang onChange={(lns) => setForeignLanguages(lns)} foreignLanguages={[]}/>
+        {/* <AddLang onChange={(lns) => setForeignLanguage(lns)} foreignLanguage={[]}/>  */}
+        <AddLang onChange={(lns) => setForeignLanguages(lns)} foreignLanguages={foreignLanguages}/> 
 
         <h3>Другая важная информация</h3>
-        <SelectEmploymentTypes label="Занятость" size="fieldset-md" allEmploymentTypes={allEmploymentTypes} onChange={(tps) => setSelectedEmpTypes(tps)} employmentTypes={[]}/>
+        <SelectEmploymentTypes label="Занятость" size="fieldset-md" allEmploymentTypes={allEmploymentTypes} onChange={(tps) => setSelectedEmpTypes(tps)} employmentTypes={employmentTypes}/>
 
         <button className='button button-primary' onClick={handleSave}>Сохранить и опубликовать</button>
       </div>
