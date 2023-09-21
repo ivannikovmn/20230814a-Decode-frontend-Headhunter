@@ -8,7 +8,8 @@ const token = localStorage.getItem("token")
 let initialState = {
   isAuth: false,
   currentUser: null,
-  tokenExt: 0  
+  tokenExt: 0,
+  error: null  
 }
 // console.log(token);
 
@@ -63,12 +64,15 @@ export const authSlice = createSlice({
       state.currentUser = null;
       state.exp = 0;
       localStorage.removeItem("token")
+    },
+    setError: (state, action) => {
+      state.error = action.payload
     }
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { authorize, logOut } = authSlice.actions
+export const { authorize, logOut, setError } = authSlice.actions
 
 export const sendVerificationEmail = (email) => (dispatch) => {
   
@@ -88,6 +92,37 @@ export const verifyCode = (email, code) => (dispatch) => {
     // console.log(res.data);
     dispatch(authorize(res.data))
 
+  })
+}
+
+export const signUp = (data, router) => (dispatch) => {
+  const fd = new FormData();
+  fd.append("full_name", data.full_name)
+  fd.append("email", data.email)  
+  fd.append("password", data.password)  
+  fd.append("password2", data.password2)  
+  fd.append("company_name", data.company_name)        
+  fd.append("company_description", data.company_description) 
+  fd.append("company_address", data.company_address)     
+  fd.append("company_logo", data.company_logo)     
+
+  axios.post(`${END_POINT}/api/auth/signup`, fd).then(res => {
+    // console.log(res.data);
+    router.push("/employer/signin")
+  }).catch(e => {
+    // console.log(e.response.data);
+    dispatch(setError(e.response.data))
+  })
+}
+
+export const signIn = (data, router) => (dispatch) => {
+  axios.post(`${END_POINT}/api/auth/login`, data).then(res => {   
+    dispatch(authorize(res.data))
+    router.push("/vacancy")
+  }).catch(e => {  
+    console.log(e);
+    if(e.response && e.response.data)  
+    dispatch(setError(e.response.data))
   })
 }
 

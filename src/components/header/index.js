@@ -8,8 +8,9 @@ import { logOut } from '@/app/store/slices/authSlice'
 
 export default function Header () {
     const dispatch = useDispatch()
-
     const isAuth = useSelector((state) => state.auth.isAuth)
+    const currentUser = useSelector((state) => state.auth.currentUser)
+    console.log(currentUser);
     return (
         <header className="header">
             <div className="container">
@@ -19,7 +20,8 @@ export default function Header () {
                             <img src="/images/logo.svg" />
                         </Link>                                                  
                         {/* <a>Работодателям</a> */}
-                        <Link href="/resumes">Мои резюме</Link>
+                       {currentUser && currentUser.role && currentUser.role.name === "manager" && <Link href="/vacancy">Мои вакансии</Link>}
+                       {currentUser && currentUser.role && currentUser.role.name !== "manager" && <Link href="/resumes">Мои резюме</Link>}
                         <a>Помощь</a>
                     </div>
                     <div>
@@ -27,9 +29,13 @@ export default function Header () {
                                 <Image src={searchIcon} alt='icon'/>
                             Поиск
                         </button>
-                        <Link className="header-button header-button--green" href="/create-resume">
+                        {currentUser && currentUser.role && currentUser.role.name === "manager" && <Link className="header-button header-button--green" href="/create-vacancy">
+                            Создать вакансию
+                        </Link> }
+                       {currentUser && currentUser.role && currentUser.role.name !== "manager" && <Link className="header-button header-button--green" href="/create-resume">
                             Создать резюме
-                        </Link>   
+                        </Link> }
+                          
                         {!isAuth && <Link className="header-button" href="/login">
                             Войти
                         </Link>}

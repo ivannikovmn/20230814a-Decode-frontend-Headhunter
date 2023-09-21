@@ -3,6 +3,7 @@ import {useEffect, useState} from "react"
 import { useSelector, useDispatch } from 'react-redux'
 import { useRouter } from 'next/navigation'
 import { authorize, sendVerificationEmail, verifyCode } from "@/app/store/slices/authSlice"
+import Link from "next/link"
 
 export default function UserLogin () {
     const [step, setStep] = useState(1)
@@ -56,19 +57,20 @@ export default function UserLogin () {
             {step === 1 && <div className="card">
                 <h1>Поиск сотрудников</h1>
                     <p>Размещение вакансий и доступ к базе резюме</p>
-                    <button className="button button-primary-bordered">Я ищу сотрудников</button>                
+                    {/* <button className="button button-primary-bordered">Я ищу сотрудников</button>                 */}
+                    <Link className="button button-primary-bordered" href="/employer/signin">Я ищу сотрудников</Link>   
             </div>}    
             
             {step === 2 && <div className="card">
                 <h1>Отправили код на ...</h1>
                 <p>Напишите его, чтобы потвердить, что это вы, а не кто-то другой</p>
-                {/* <form> */}
+                <form>
                     <input className="input" placeholder="Введите код" value={code} onChange={(e) => setCode(e.target.value)}/>
                     <p>Повторить можно через {min}:{sec}</p>
                     {/* <button className="button button-primary" onClick={()=>setStep(3)}>Продолжить</button>                 */}
                     <button className="button button-primary" onClick={verifyCodeFunc} type="button">Продолжить</button>                
                     <button className="button button-primary-bordered" onClick={()=>setStep(1)}>Назад</button>                
-                {/* </form> */}
+                </form>
             </div>}     
 
             {/* {step === 3 && <div className="card">
