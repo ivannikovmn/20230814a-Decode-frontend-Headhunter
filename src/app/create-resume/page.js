@@ -13,7 +13,7 @@ import ModalAddExp from '@/components/ModalAddExp';
 import AddEducation from '@/components/AddEducation';
 import AddLang from '@/components/AddLang';
 import SelectEmploymentTypes from '@/components/SelectEmploymentTypes';
-import { useRouter } from 'next/navigation';
+import { useRouter } from "next/navigation";
 import { useDispatch } from 'react-redux';
 import { createResume } from '@/app/store/slices/resumeSlice';
 
@@ -231,8 +231,8 @@ export default function CreateResume() {
         </fieldset>   
 
         {/* <AutoCompliteTags  placeholder="" type="text" label="Ключевые навыки" size="fieldset-md" items={countries} onSelect={onSelect}/>  */}
-        {/* <AutoCompliteTags  placeholder="" type="text" label="Ключевые навыки" size="fieldset-md" items={skills} onSelect={onSelect}/>  */}
-        <AutoCompliteTags  placeholder="" type="text" label="Ключевые навыки" size="fieldset-md" items={allSkills} onSelect={onSkillsChange} selected={[]}/> 
+        {/* <AutoCompliteTags  placeholder="" type="text" label="Ключевые навыки" size="fieldset-md" items={skills} onSelect={onSelect}/>  */}        
+        <AutoCompliteTags  placeholder="" type="text" label="Ключевые навыки" size="fieldset-md" items={allSkills} onSelect={onSkillsChange} selected={skills.length > 0 ? skills.split(",").map(item=> ({name: item})) : []}/> 
 
         <h3>Образование</h3>
 

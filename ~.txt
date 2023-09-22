@@ -22,6 +22,16 @@ https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopl
 https://jwt.io/
 https://www.npmjs.com/package/jwt-decode
 npm i jwt-decode
+---l12
+https://www.svgrepo.com/
+---l13
+https://www.tiny.cloud/
+https://ckeditor.com/docs/ckeditor5/latest/installation/integrations/react.html 
+	https://ckeditor.com/docs/ckeditor5/latest/installation/getting-started/configuration.html
+	https://ckeditor.com/docs/ckeditor5/latest/features/toolbar/toolbar.html
+	
+npm install --save @ckeditor/ckeditor5-react @ckeditor/ckeditor5-build-classic
+
 
 git add .
 git commit -m "initial"
@@ -76,4 +86,7 @@ git push origin main
 git add .
 git commit -m "add React l-11 (p1 fix auth/user/index.js, p2 fix key, p1-p4 employer signup, view vacancy)"
 git push origin main
-	
+---
+git add .
+git commit -m "add React l-12 (p1 fix setCitiy > setCity, p3 fix key and other AutoCompliteTags, p1-p4 create vacancy, p5 delete vacancy)"
+git push origin main
