@@ -12,6 +12,8 @@ http://localhost:3000/create-resume
 http://localhost:3000/edit-resume/2
 http://localhost:3000/employer/signup
 http://localhost:3000/employer/signin
+http://localhost:3000/vacancy/35
+http://localhost:3000/search/vacancy/advanced
 ---l4
 npm i axios
 ---l8
@@ -28,9 +30,9 @@ https://www.svgrepo.com/
 https://www.tiny.cloud/
 https://ckeditor.com/docs/ckeditor5/latest/installation/integrations/react.html 
 	https://ckeditor.com/docs/ckeditor5/latest/installation/getting-started/configuration.html
-	https://ckeditor.com/docs/ckeditor5/latest/features/toolbar/toolbar.html
-	
+	https://ckeditor.com/docs/ckeditor5/latest/features/toolbar/toolbar.html	
 npm install --save @ckeditor/ckeditor5-react @ckeditor/ckeditor5-build-classic
+https://nextjs.org/docs/app/api-reference/functions/use-search-params
 
 
 git add .
@@ -89,4 +91,8 @@ git push origin main
 ---
 git add .
 git commit -m "add React l-12 (p1 fix setCitiy > setCity, p3 fix key and other AutoCompliteTags, p1-p4 create vacancy, p5 delete vacancy)"
+git push origin main
+---
+git add .
+git commit -m "add React l-13 (p1 view vacancy, p2-p6 search vacancy advanced)"
 git push origin main

@@ -13,14 +13,18 @@ export const vacancySlice = createSlice({
     cities: [],
     experiences: [],
     skills: [],
-    empTypes: []
+    empTypes: [],
+    // searchedVacancies: []
   },
   reducers: {
-    setMyVacancies: (state, action) => {
-        state.vacancies = action.payload.vacancies
+    // setMyVacancies: (state, action) => {
+    //     state.vacancies = action.payload.vacancies
+    // },
+    setVacancies: (state, action) => {
+      state.vacancies = action.payload.vacancies
     },
-    // uppendVacancy: (state, action) => {
-    //   state.resumes = [...state.vacancies, action.payload.newvacancy]
+    // setSearchedVacancies: (state, action) => {
+    //   state.searchedVacancies = action.payload.vacancies
     // },
     setVacancy: (state, action) => {
       state.vacancy = action.payload.vacancy
@@ -50,18 +54,21 @@ export const vacancySlice = createSlice({
 
 // Action creators are generated for each case reducer function
 // export const { setMyVacancies, uppendVacancy, setVacancy, handleDeleteVacancy, setSpecializations, setCities, setExps, setSkills, setEmpType } = vacancySlice.actions
-export const { setMyVacancies, setVacancy, handleDeleteVacancy, setSpecializations, setCities, setExps, setSkills, setEmpType } = vacancySlice.actions
+// export const { setMyVacancies, setVacancy, handleDeleteVacancy, setSpecializations, setCities, setExps, setSkills, setEmpType, setSearchedVacancies } = vacancySlice.actions
+export const { setVacancies, setVacancy, handleDeleteVacancy, setSpecializations, setCities, setExps, setSkills, setEmpType } = vacancySlice.actions
 
 export const getMyVacancies = () => async (dispatch) => {
     
     try{   
         const res = await axios.get(`${END_POINT}/api/vacancy`);        
-        dispatch(setMyVacancies({vacancies: res.data}))        
+        // dispatch(setMyVacancies({vacancies: res.data}))        
+        dispatch(setVacancies({vacancies: res.data}))        
     }catch(e){
         alert("Что-то пошло не так, сообщите об ошибки тех спецам сайта!")
     }
     
 }
+
 
 export const getSpecializations = () => async (dispatch) => {
     
@@ -139,17 +146,51 @@ export const deleteVacancy = (id) => async (dispatch) => {
   }  
 }
 
-// export const getResumeById = (id) => async (dispatch) => {
+export const getVacancyById = (id) => async (dispatch) => {
     
-//   try {    
-//       const res = await axios.get(`${END_POINT}/api/resume/${id}`);
-//       console.log(res.data);
-//       dispatch(setResume({resume: res.data}))        
-//   } catch(e) {
-//       alert("Что-то пошло не так, сообщите об ошибки тех спецам сайта!")
-//   }
+  try {    
+      const res = await axios.get(`${END_POINT}/api/vacancy/${id}`);
+      dispatch(setVacancy({vacancy: res.data}))        
+  } catch(e) {
+      alert("Что-то пошло не так, сообщите об ошибки тех спецам сайта!")
+  }
   
-// }
+}
+
+
+export const getSearchedVacancies = (params, router) => async (dispatch) => {
+    
+  try{   
+      const {
+        q,
+        specializationId,
+        cityId,
+        experienceId,
+        employmentTypeId,
+        salary,
+        salary_type
+      } = params;
+
+
+      let queryString = "?"
+      if(q) queryString +=`q=${q}&`
+      if(specializationId) queryString +=`specializationId=${specializationId}&`
+      if(cityId) queryString +=`cityId=${cityId}&`
+      if(salary) queryString +=`salary=${salary}&`
+      if(salary_type) queryString +=`salary_type=${salary_type}&`
+      if(experienceId) queryString +=`experienceId=${experienceId}&`
+      if(employmentTypeId) queryString +=`employmentTypeId=${employmentTypeId}&`
+
+      router.push(`/search/vacancy${queryString}`)
+
+      const res = await axios.get(`${END_POINT}/api/vacancy/search${queryString}`);
+      // dispatch(setSearchedVacancies({vacancies: res.data}))        
+      dispatch(setVacancies({vacancies: res.data}))        
+  }catch(e){
+      alert("Что-то пошло не так, сообщите об ошибки тех спецам сайта!")
+  }
+  
+}
 
 // export const editResume = (sendData, router) => async (dispatch) => {  
 //   try{      
