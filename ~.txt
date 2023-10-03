@@ -33,6 +33,8 @@ https://ckeditor.com/docs/ckeditor5/latest/installation/integrations/react.html
 	https://ckeditor.com/docs/ckeditor5/latest/features/toolbar/toolbar.html	
 npm install --save @ckeditor/ckeditor5-react @ckeditor/ckeditor5-build-classic
 https://nextjs.org/docs/app/api-reference/functions/use-search-params
+---l14
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort
 
 
 git add .
@@ -95,4 +97,8 @@ git push origin main
 ---
 git add .
 git commit -m "add React l-13 (p1 view vacancy, p2-p6 search vacancy advanced)"
+git push origin main
+---
+git add .
+git commit -m "add React l-13 (fix localStorage is not defined, p2-p4 apply[create,view], p5 apply sort)"
 git push origin main
