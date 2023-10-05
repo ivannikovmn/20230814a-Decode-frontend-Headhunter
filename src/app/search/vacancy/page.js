@@ -132,8 +132,10 @@ export default function SearchVacancy() {
                     <fieldset className="fieldset-vertical fieldset-md">
                         <label>Опыт работы</label>
                         <div>
-                            {experiences.map(exp => <div className="radio">
-                                <input type="radio" key={exp.id} value={exp.id} name="exp" onChange={handleChangeExp}/>
+                            {/* {experiences.map(exp => <div className="radio">
+                                <input type="radio" key={exp.id} value={exp.id} name="exp" onChange={handleChangeExp}/> */}
+                                {experiences.map(exp => <div key={exp.id} className="radio">
+                                <input type="radio" value={exp.id} name="exp" onChange={handleChangeExp}/>                                
                                 <label>{exp.duration}</label>
                             </div>)}
                         </div>
@@ -143,8 +145,10 @@ export default function SearchVacancy() {
                     <fieldset className="fieldset-vertical fieldset-md">
                         <label>Тип занятости</label>
                         <div>
-                            {empTypes.map(et => <div className="radio">
-                                <input type="radio" key={et.id} value={et.id} name="empType" onChange={(e) => setEmploymentType(e.target.value)}/>
+                            {/* {empTypes.map(et => <div className="radio">
+                                <input type="radio" key={et.id} value={et.id} name="empType" onChange={(e) => setEmploymentType(e.target.value)}/> */}
+                            {empTypes.map(et => <div key={et.id} className="radio">
+                                <input type="radio" value={et.id} name="empType" onChange={(e) => setEmploymentType(e.target.value)}/>                                
                                 <label>{et.name}</label>
                             </div>)}
                         </div>

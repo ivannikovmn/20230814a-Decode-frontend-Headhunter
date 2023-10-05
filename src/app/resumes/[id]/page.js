@@ -6,6 +6,7 @@ import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getResumeById } from '@/app/store/slices/resumeSlice'
 import { useParams } from 'next/navigation'
+import { getAgeFromBirthday, monthsInRussian, monthsInRussian2 } from '@/app/utils/format'
 
 export default function ResumePage() {
 
@@ -20,20 +21,24 @@ export default function ResumePage() {
   console.log("in page", resume);
 
   useEffect(didMount, [])
-  const birthday = new Date (resume.birthday)
+  // const birthday = new Date (resume.birthday)
 
-  const monthsInRussian = [
-    'января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'
-    ];
+  // const monthsInRussian = [
+  //   'января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'
+  //   ];
 
-    const monthsInRussian2 = [
-      'январь', 'февраль', 'март', 'апрель', 'май', 'июнь', 'июль', 'август', 'сентябрь', 'октябрь', 'ноябрь', 'декабрь'
-      ];    
+  //   const monthsInRussian2 = [
+  //     'январь', 'февраль', 'март', 'апрель', 'май', 'июнь', 'июль', 'август', 'сентябрь', 'октябрь', 'ноябрь', 'декабрь'
+  //     ];    
 
-    let age = 0;
+  //   let age = 0;
 
-    age = new Date().getTime() - birthday.getTime();
-    age = parseInt(age / (1000 * 60 * 60 * 24 * 365))
+  //   age = new Date().getTime() - birthday.getTime();
+  //   console.log(age);
+  //   age = parseInt(age / (1000 * 60 * 60 * 24 * 365))
+
+  const age = getAgeFromBirthday(resume.birthday)
+  const birthday = new Date(resume.birthday)
 
     const showPhone = phone => {
       let res = ""
@@ -83,7 +88,7 @@ export default function ResumePage() {
           let end = new Date(job.end_date)
 
           return(
-          <div className='flex working-history'>
+          <div className='flex working-history' key={job.id}>
             <div className='working-history-date'>
               {monthsInRussian2[start.getMonth()]} {start.getFullYear()} - {monthsInRussian2[end.getMonth()]}  {end.getFullYear()}
             </div>        
@@ -98,7 +103,7 @@ export default function ResumePage() {
       }
 
       <h3>Ключевые навыки</h3>      
-      {skills.map(skill => (<span className='tag mr4'>{skill}</span>))}
+      {skills.map(skill => (<span className='tag mr4' key={skill}>{skill}</span>))}
       </div>
 
       <h3>Обо мне</h3>
@@ -111,7 +116,7 @@ export default function ResumePage() {
           let end = new Date(ed.end_date)
 
           return(
-          <div className='flex working-history'>
+          <div key={ed.id} className='flex working-history'>
             <div className='working-history-date'>
               {end.getFullYear()}
             </div>        
@@ -125,7 +130,7 @@ export default function ResumePage() {
       }     
 
       <h3>Знание языков</h3>   
-      {resume.foreignLanguages && resume.foreignLanguages.map(fl => (<p className='tag mr4'>{fl.name} - {fl.level}</p>))}
+      {resume.foreignLanguages && resume.foreignLanguages.map(fl => (<p key={fl.id} className='tag mr4'>{fl.name} - {fl.level}</p>))}
 
       <p>{resume.citizenshipObj && resume.citizenshipObj.name}</p>
     </main>    

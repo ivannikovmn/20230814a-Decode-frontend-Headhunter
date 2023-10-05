@@ -6,11 +6,16 @@ import { useDispatch, useSelector } from "react-redux"
 import { getSpecializations, getCities, getExperiences, getSkills, getEmpType, createVacancy } from "@/app/store/slices/vacancySlice"
 import ModalSelectSpec from "@/components/ModalSelectSpec"
 import AutoCompliteSelect from "@/components/AutoCompliteSelect"
-import { CKEditor } from '@ckeditor/ckeditor5-react';
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+// import { CKEditor } from '@ckeditor/ckeditor5-react';
+// import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import AutoCompliteTags from "@/components/AutoCompliteTags"
 import { useRouter } from 'next/navigation';
+import dynamic from "next/dynamic"
+// import { Editor } from "./editor"
 export default function CreateVacancy() {
+    // const { CKEditor } = dynamic(() => import('@ckeditor/ckeditor5-react'), { ssr: false })
+    // const ClassicEditor = dynamic(() => import('@ckeditor/ckeditor5-build-classic'), { ssr: false })
+
     const [name, setName] = useState("")
     // const [specialization, setSpecialization] = useState()
     const [specializationId, setSpecialization] = useState()
@@ -81,6 +86,8 @@ export default function CreateVacancy() {
         }, router))
     }
     
+    const Editor = dynamic(() => import("./editor"), { ssr: false });
+
     return (
         <main>
             <Header />
@@ -125,8 +132,10 @@ export default function CreateVacancy() {
                 <fieldset className="fieldset-vertical fieldset-md">
                     <label>Опыт работы</label>
                     <div>
-                        {experiences.map(exp => <div className="radio">
-                            <input type="radio" key={exp.id} value={exp.id} name="exp" onChange={handleChangeExp}/>
+                        {/* {experiences.map(exp => <div className="radio">
+                            <input type="radio" key={exp.id} value={exp.id} name="exp" onChange={handleChangeExp}/> */}
+                        {experiences.map(exp => <div key={exp.id} className="radio">
+                            <input type="radio" value={exp.id} name="exp" onChange={handleChangeExp}/>                            
                             <label>{exp.duration}</label>
                         </div>)}
                     </div>
@@ -136,7 +145,7 @@ export default function CreateVacancy() {
                 <fieldset className="fieldset-vertical fieldset-md">
                     <label>Рсскажите про вакансию</label>
                     <div>
-                        <CKEditor
+                        {/* <CKEditor
                             editor={ ClassicEditor }
                             // data="
                                 // <h2>Обязанности</h2><ul><li></li><li></li></ul><h2>Требование</h2><ul><li></li><li></li></ul><h2>Условия</h2><ul><li></li><li></li></ul>"
@@ -159,7 +168,8 @@ export default function CreateVacancy() {
                             onFocus={ ( event, editor ) => {
                                 console.log( 'Focus.', editor );
                             } }
-                        />
+                        /> */}
+                        <Editor description={description} setDescription={setDescription}/>
                     </div>
                     
                 </fieldset> 
@@ -169,8 +179,10 @@ export default function CreateVacancy() {
                 <fieldset className="fieldset-vertical fieldset-md">
                     <label>Тип занятости</label>
                     <div>
-                        {empTypes.map(et => <div className="radio">
-                            <input type="radio" key={et.id} value={et.id} name="exp" onChange={(e) => setEmploymentType(e.target.value)}/>
+                        {/* {empTypes.map(et => <div className="radio">
+                            <input type="radio" key={et.id} value={et.id} name="exp" onChange={(e) => setEmploymentType(e.target.value)}/> */}
+                            {empTypes.map(et => <div key={et.id} className="radio">
+                            <input type="radio" value={et.id} name="exp" onChange={(e) => setEmploymentType(e.target.value)}/>                            
                             <label>{et.name}</label>
                         </div>)}
                     </div>

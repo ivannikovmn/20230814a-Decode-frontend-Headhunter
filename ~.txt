@@ -35,6 +35,23 @@ npm install --save @ckeditor/ckeditor5-react @ckeditor/ckeditor5-build-classic
 https://nextjs.org/docs/app/api-reference/functions/use-search-params
 ---l14
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort
+---l16
+npm run build
+	права администратора для vsc
+https://github.com/ant-design/ant-design/issues/7169
+https://stackoverflow.com/questions/72658294/referenceerror-self-is-not-defined-while-using-ckeditor
+npm run start
+http://localhost:3001
+-
+ssh root@167.71.215.3
+https://cloud.digitalocean.com/droplets/369486588/access?i=297482
+ls
+https://wiki.crowncloud.net/?How_to_Install_Node_js_on_Ubuntu_23_04
+	wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.39.3/install.sh | bash
+	source ~/.profile
+	nvm --version
+node -v
+npm -v
 
 
 git add .
@@ -102,3 +119,12 @@ git push origin main
 git add .
 git commit -m "add React l-13 (fix localStorage is not defined, p2-p4 apply[create,view], p5 apply sort)"
 git push origin main
+---
+git add .
+git commit -m "add React l-14 (fix localStorage is not defined, p2-p4 apply[create,view], p5 apply sort)"
+git push origin main
+---
+git add .
+git commit -m "add React l-15 (VacancyApplies), add React l-16 (build) = last version"
+git push origin main
+

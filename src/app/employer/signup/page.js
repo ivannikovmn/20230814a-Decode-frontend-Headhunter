@@ -54,9 +54,11 @@ export default function EmployerSignup() {
                     чтобы купить доступ к базе резюме или
                     публикцию вакансий по выгодным ценам - все
                     акции уже ждут вас в разделе
-                    "Спецпредложения"
+                    {/* "Спецпредложения" */}
+                    &quot;Спецпредложения&quot;
                 </p>
                 <p>Ответим на вопросы</p>
+                {/* <a href='tel:77272321313'>+7 727 232 13 13</a> */}
                 <a href='tel:77272321313'>+7 727 232 13 13</a>
             </div>
 
@@ -68,7 +70,7 @@ export default function EmployerSignup() {
                       <input className="input" placeholder="Введите email" value={email} onChange={(e)=>setEmail(e.target.value)}/>                      
                       <button className="button button-primary" onClick={()=>setStep(2)}>Продолжить</button>
                   </form>
-                  {error && Object.keys(error).map(key => (<p className="error"> { error[key] } </p>))}
+                  {error && Object.keys(error).map(key => (<p key={key} className="error"> { error[key] } </p>))}
               </div>}
 
               {step === 2 && <div className="card">
@@ -79,7 +81,7 @@ export default function EmployerSignup() {
                     <button className="button button-primary" onClick={()=>setStep(3)} type="button">Продолжить</button>
                     <button className="button button-primary-bordered" onClick={()=>setStep(1)}>Назад</button>                
                 </form>         
-                {error && Object.keys(error).map(key => (<p className="error"> { error[key] } </p>))}           
+                {error && Object.keys(error).map(key => (<p key={key} className="error"> { error[key] } </p>))}           
               </div>}
 
               {step === 3 && <div className="card">
@@ -92,7 +94,7 @@ export default function EmployerSignup() {
                     <button className="button button-primary" onClick={()=>setStep(4)} type="button">Продолжить</button>
                     <button className="button button-primary-bordered" onClick={()=>setStep(2)}>Назад</button>                
                 </form>  
-                {error && Object.keys(error).map(key => (<p className="error"> { error[key] } </p>))}                  
+                {error && Object.keys(error).map(key => (<p key={key} className="error"> { error[key] } </p>))}                  
               </div>}
 
               {step === 4 && <div className="card">
