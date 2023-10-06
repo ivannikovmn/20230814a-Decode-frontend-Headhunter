@@ -70,8 +70,29 @@ npm run build
 pm2 restart 0
 -
 	https://billing.hoster.kz/billing/manage_domain.php
-
-
+	http://hh.imn.kz:3001/ > http://hh.imn.kz
+-
+nginx
+https://www.digitalocean.com/community/tutorials/how-to-install-nginx-on-ubuntu-22-04
+	sudo apt update
+	sudo apt install nginx
+	sudo ufw app list
+	sudo ufw allow 'Nginx HTTP'
+	sudo ufw status
+	systemctl status nginx
+pm2 stop 0
+	systemctl restart nginx
+systemctl status nginx
+	http://167.71.215.3/
+cd /etc/nginx/
+ls
+cd sites-available/
+vi default
+i
+https://www.phusionpassenger.com/library/deploy/nginx/deploy/nodejs/
+https://www.digitalocean.com/community/tutorials/how-to-set-up-a-node-js-application-for-production-on-ubuntu-16-04
+esc
+:wq
 
 git add .
 git commit -m "initial"
@@ -149,4 +170,12 @@ git push origin main
 ---
 git add .
 git commit -m "add React l-16 = login page changes"
+git push origin main
+---
+git add .
+git commit -m "add React l-16(port 80)"
+git push origin main
+---
+git add .
+git commit -m "add React l-16(port 3001)"
 git push origin main
