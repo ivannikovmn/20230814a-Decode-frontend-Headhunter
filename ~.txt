@@ -87,12 +87,34 @@ systemctl status nginx
 cd /etc/nginx/
 ls
 cd sites-available/
-vi default
+vi default (? dns одобряются hh.imn.kz)
 i
 https://www.phusionpassenger.com/library/deploy/nginx/deploy/nodejs/
 https://www.digitalocean.com/community/tutorials/how-to-set-up-a-node-js-application-for-production-on-ubuntu-16-04
+-
+server {
+        listen 80;
+        server_name hh.imn.kz
+        location / {
+                proxy_pass http://localhost:3001;
+                proxy_http_version 1.1;
+                proxy_set_header Upgrade $http_upgrade;
+                proxy_set_header Connection 'upgrade';
+                proxy_set_header Host $host;
+                proxy_cache_bypass $http_upgrade;
+        }
+}
+-
 esc
 :wq
+pwd
+cd
+-
+https://certbot.eff.org/
+	sudo snap install --classic certbot
+	sudo ln -s /snap/bin/certbot /usr/bin/certbot
+	sudo certbot --nginx (ошибка с server_name)
+
 
 git add .
 git commit -m "initial"
@@ -178,4 +200,8 @@ git push origin main
 ---
 git add .
 git commit -m "add React l-16(port 3001)"
+git push origin main
+---
+git add .
+git commit -m "add React l-16(p4 sub domain, p5 ssl)"
 git push origin main
