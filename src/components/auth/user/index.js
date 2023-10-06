@@ -46,7 +46,7 @@ export default function UserLogin () {
         <section className="login-page">
             {/* {isAuth ? "True" : "False"} */}
             {step === 1 && <div className="card">
-                <h1>Поиск работы</h1>
+                <h1>Поиск работы в HH</h1>
                 <form>
                     <input className="input" placeholder="Введите email" value={email} onChange={(e)=>setEmail(e.target.value)}/>
                     {/* <button className="button button-primary" onClick={()=>setStep(2)}>Продолжить</button>                 */}

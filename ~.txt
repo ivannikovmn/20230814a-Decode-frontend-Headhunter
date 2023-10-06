@@ -52,6 +52,19 @@ https://wiki.crowncloud.net/?How_to_Install_Node_js_on_Ubuntu_23_04
 	nvm --version
 node -v
 npm -v
+git clone https://github.com/ivannikovmn/20230814a-Decode-frontend-Headhunter.git
+cd 20230814a-Decode-frontend-Headhunter/
+npm i
+-
+npm run start
+npm run build
+http://167.71.215.3:3001/
+pm2 start npm -- start --name "hh_front" -
+pm2 logs 1
+pm2 delete 0
+pm2 start npm --name "hh_front" -- start
+pm2 logs
+
 
 
 git add .
@@ -127,4 +140,7 @@ git push origin main
 git add .
 git commit -m "add React l-15 (VacancyApplies), add React l-16 (build) = last version"
 git push origin main
-
+---
+git add .
+git commit -m "add React l-16 = login page changes"
+git push origin main
