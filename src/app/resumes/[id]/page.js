@@ -2,25 +2,35 @@
 import Header from '@/components/header'
 import MyResumes from '@/components/myresumes'
 import Link from 'next/link'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getResumeById } from '@/app/store/slices/resumeSlice'
+import { getResumeById, setLoadingTrue } from '@/app/store/slices/resumeSlice'
 import { useParams } from 'next/navigation'
+
 import { getAgeFromBirthday, monthsInRussian, monthsInRussian2 } from '@/app/utils/format'
 
 export default function ResumePage() {
 
   const dispatch = useDispatch();
   const {id} = useParams();
+  // const [loading, setLoading] = useState(true)
   const resume = useSelector(state => state.resume.resume)
-
+  const isLoading = useSelector(state => state.resume.isLoading)
   const didMount = () => {
     dispatch(getResumeById(id))
+
+    return () => {
+      dispatch(setLoadingTrue())
+    }
   }
 
   console.log("in page", resume);
 
   useEffect(didMount, [])
+  // useEffect(() => {
+  //   setLoading(isLoading)
+  // }, [isLoading])
+
   // const birthday = new Date (resume.birthday)
 
   // const monthsInRussian = [
@@ -58,7 +68,10 @@ export default function ResumePage() {
   return (
     <main>
       <Header />
-      <div className='container'>
+      {isLoading && <span>Loading</span>}
+      {/* {loading && <span>Loading</span>} */}
+      {!isLoading && <div className='container'>
+      {/* {!loading && <div className='container'> */}
         <div className='flex flex-ai-c flex-js-sb ptb7'>
             <Link className='link' href="/resumes">К списку резюме</Link>            
             <Link className='button button-secondary-bordered' href={`/edit-resume/${resume.id}`}>Редактировать</Link>
@@ -104,7 +117,7 @@ export default function ResumePage() {
 
       <h3>Ключевые навыки</h3>      
       {skills.map(skill => (<span className='tag mr4' key={skill}>{skill}</span>))}
-      </div>
+      </div>}
 
       <h3>Обо мне</h3>
 

@@ -44,8 +44,16 @@ export default function CreateResume() {
   const [foreignLanguages, setForeignLanguages] = useState("")
   const [employmentTypes, setSelectedEmpTypes] = useState([])
   const [about, setAbout] = useState("")
+
+  const [loading, setLoading] = useState(true)
   
+  const fetchDatas = async () => {
+    const resSkills = await axios.get(`${END_POINT}/api/skills`)      
+    setSkills(resSkills.data)
+  }
+
   useEffect(() => {
+  // useEffect(async() => {    
     console.log("didMount");
     axios.get(`${END_POINT}/api/region/cities`).then(res => {
       // console.log(res.data);
@@ -55,12 +63,17 @@ export default function CreateResume() {
     axios.get(`${END_POINT}/api/region/countries`).then(res => {
       // console.log(res.data);
       setCountries(res.data)
+      setLoading(false)
     })    
 
-    axios.get(`${END_POINT}/api/skills`).then(res => {
-      // console.log(res.data);
-      setSkills(res.data)
-    })  
+    // axios.get(`${END_POINT}/api/skills`).then(res => {
+    //   // console.log(res.data);
+    //   setSkills(res.data)
+    // })  
+    // const resSkills = await axios.get(`${END_POINT}/api/skills`)      
+    // setSkills(resSkills.data)
+    fetchDatas()
+     
     
     axios.get(`${END_POINT}/api/employment-types`).then(res => {
       // console.log(res.data);

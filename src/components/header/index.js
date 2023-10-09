@@ -12,7 +12,8 @@ export default function Header () {
     const dispatch = useDispatch()
     const isAuth = useSelector((state) => state.auth.isAuth)
     const currentUser = useSelector((state) => state.auth.currentUser)
-    console.log(currentUser);
+    // console.log(currentUser);
+    console.log("Header Component is Auth: ", isAuth);
 
     useEffect(() => {
         const token = localStorage.getItem("token")
@@ -26,6 +27,8 @@ export default function Header () {
             }
         }
     }, [])
+
+    console.log("Header rerender");
 
     return (
         <header className="header">

@@ -205,3 +205,7 @@ git push origin main
 git add .
 git commit -m "add React l-16(p4 sub domain, p5 ssl)"
 git push origin main
+---
+git add .
+git commit -m "add tg1(auth, loading), tg2(props - useState, useEffect)"
+git push origin main
